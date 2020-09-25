@@ -9,8 +9,17 @@ export class UsersService {
     constructor(@InjectModel(UserModel) private readonly userModel:ReturnModelType<typeof UserModel>){}
 
     //查询所有的用户
-    async allUser():Promise<UserModel[]>{
-        return await this.userModel.find()
+    async allUser(query:any):Promise<{}>{
+        const total = await this.userModel.countDocuments()
+        const pageSize = Math.ceil(total/query.size)
+        const jump = (query.page-1)*query.size
+        const data = await this.userModel.find().skip(jump).limit(Number(query.size)).sort(query.sort)
+        return {
+            total,
+            data,
+            pageSize,
+            currentPage:query.page
+        }
     }
 
     //创建一个用户

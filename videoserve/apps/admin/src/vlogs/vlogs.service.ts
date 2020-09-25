@@ -23,16 +23,16 @@ export class VlogsService {
     }
 
     //vlog列表
-    async vlogList(page:number,size:number,name?:string):Promise<{}>{
+    async vlogList(query:any):Promise<{}>{
         const total = await this.vlogModel.countDocuments()
-        const pageSize = Math.ceil(total/size)
-        const jump = (page-1)*size
-        const data = await this.vlogModel.find({'vTitle':{$regex:`/${name}/`}}).skip(jump).limit(size)
+        const pageSize = Math.ceil(total/query.size)
+        const jump = (query.page-1)*query.size
+        const data = await this.vlogModel.find().skip(jump).limit(Number(query.size)).sort(query.sort)
         return {
             total,
             data,
             pageSize,
-            currentPage:page
+            currentPage:query.page
         }
     }
 
