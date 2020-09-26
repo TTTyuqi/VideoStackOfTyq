@@ -52,6 +52,7 @@ export class VlogsController {
                     prop:'vTitle',
                     sortable:true,
                     search:true,
+                    regex:true,
                 },
                 {
                     label:'用户🆔',

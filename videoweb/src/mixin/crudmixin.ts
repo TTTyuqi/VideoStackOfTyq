@@ -5,7 +5,7 @@ export default class crudmixin extends Vue{
     @Prop() urlpath!:string
     loading=false
     tabledata=[]
-    option={}
+    option:any={}
     page={
         total:0,
         currentPage: 1,
@@ -22,12 +22,18 @@ export default class crudmixin extends Vue{
     //查询
     searchChange(params,done){
         // console.log("===",params)
-        if(params.userName){
-            params.userName = {$regex:params.userName}
+        for(let key in params){
+            const cloumn = this.option.column.find(c => key == c.prop)
+            if(cloumn.regex){
+                params[key] = {$regex:params[key]}
+            }
         }
-        if(params.vTitle){
-            params.vTitle = {$regex:params.vTitle}
-        }
+        // if(params.userName){
+        //     params.userName = {$regex:params.userName}
+        // }
+        // if(params.vTitle){
+        //     params.vTitle = {$regex:params.vTitle}
+        // }
         this.query.where = params
         this.feachData()
         done();

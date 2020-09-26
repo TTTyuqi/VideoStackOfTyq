@@ -53,6 +53,7 @@ export class UsersController {
                     prop:'userName',
                     sortable:true,
                     search:true,
+                    regex:true,
                 },
                 {
                     label:'密码',
