@@ -22,7 +22,7 @@ export class VlogsController {
     }
 
     @ApiOperation({summary:'更新vlog'})
-    @Put('/vlog')
+    @Put('/vlog/:id')
     async updateById(@Param('id') id:string,@Body() vlog:VlogModel):Promise<any>{
         return await this.vlogServices.modifyVlogById(id,vlog)
     }
@@ -37,5 +37,31 @@ export class VlogsController {
     @Delete('/vlog/:id')
     async delVlog(@Param('id') id:string):Promise<any>{
         return await this.vlogServices.delVlogById(id)
+    }
+
+    @Get('/option')
+    getOption():{}{
+        return {
+            index:true,
+            indexLabel:'序号',
+            align:'center',
+            searchMenuSpan:8,
+            column:[
+                {
+                    label:'视频名称',
+                    prop:'vTitle',
+                    sortable:true,
+                    search:true,
+                },
+                {
+                    label:'用户🆔',
+                    prop:'vUserId'
+                },
+                {
+                    label:'背景图路径',
+                    prop:'vBgimg'
+                }
+            ]
+        }
     }
 }

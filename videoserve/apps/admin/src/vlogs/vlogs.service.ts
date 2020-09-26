@@ -24,14 +24,16 @@ export class VlogsService {
 
     //vlog列表
     async vlogList(query:any):Promise<{}>{
-        const total = await this.vlogModel.countDocuments()
+        const where = JSON.parse(query.where)
+        const total = await this.vlogModel.find(where).countDocuments()
         const pageSize = Math.ceil(total/query.size)
         const jump = (query.page-1)*query.size
-        const data = await this.vlogModel.find().skip(jump).limit(Number(query.size)).sort(query.sort)
+        const data = await this.vlogModel.find(where).skip(jump).limit(Number(query.size)).sort(query.sort)
         return {
             total,
             data,
-            pageSize,
+            pageSize:query.size,
+            lastPage:pageSize,
             currentPage:query.page
         }
     }

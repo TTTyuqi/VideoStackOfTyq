@@ -1,7 +1,6 @@
 import { UserModel } from '@libs/db/model/user.model';
 import { Injectable } from '@nestjs/common';
 import { ReturnModelType } from '@typegoose/typegoose';
-import { promises } from 'dns';
 import { InjectModel } from 'nestjs-typegoose';
 
 @Injectable()
@@ -10,14 +9,17 @@ export class UsersService {
 
     //查询所有的用户
     async allUser(query:any):Promise<{}>{
-        const total = await this.userModel.countDocuments()
+        const where = JSON.parse(query.where)
+        const total = await this.userModel.find(where).countDocuments()
         const pageSize = Math.ceil(total/query.size)
         const jump = (query.page-1)*query.size
-        const data = await this.userModel.find().skip(jump).limit(Number(query.size)).sort(query.sort)
+        // console.log("query.where",query.where)
+        const data = await this.userModel.find(where).skip(jump).limit(Number(query.size)).sort(query.sort)
         return {
             total,
             data,
-            pageSize,
+            pageSize:query.size,
+            lastPage:pageSize,
             currentPage:query.page
         }
     }

@@ -2,6 +2,7 @@ import CrudFucModel from '@libs/db/model/crudfuc.model';
 import { UserModel } from '@libs/db/model/user.model';
 import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { promises } from 'dns';
 import { UsersService } from './users.service';
 
 @ApiTags('用户模块')
@@ -37,5 +38,27 @@ export class UsersController {
     @Post('/user')
     async addUser(@Body() user:UserModel):Promise<any>{
         return await this.usersService.createUser(user)
+    }
+
+    @Get('/option')
+    getOption():{}{
+        return{
+            index:true,
+            indexLabel:'序号',
+            align:'center',
+            searchMenuSpan:8,
+            column:[
+                {
+                    label:'用户名称',
+                    prop:'userName',
+                    sortable:true,
+                    search:true,
+                },
+                {
+                    label:'密码',
+                    prop:'passWord'
+                }
+            ]
+        }
     }
 }
