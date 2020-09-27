@@ -24,7 +24,6 @@ import  crudmixin  from '../../../mixin/crudmixin'
     mixins:[crudmixin]
 })
 export default class VideoPage extends Vue {
-
 }
 </script>
 

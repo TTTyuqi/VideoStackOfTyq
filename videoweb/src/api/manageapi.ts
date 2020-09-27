@@ -1,4 +1,4 @@
-import instance from '@/network/index'
+import {instance,instance1} from '@/network/index'
 import { AxiosPromise } from 'axios'
 
 //get
@@ -13,6 +13,15 @@ export const getAction = (url:string,params?:{}):AxiosPromise<any> => {
 //post
 export function postAction(url:string,data:{}):AxiosPromise<any>{
     return instance({
+        url,
+        method:'post',
+        data,
+    })
+}
+
+//post文件上传
+export function postFileAction(url:string,data:{}):AxiosPromise<any>{
+    return instance1({
         url,
         method:'post',
         data,

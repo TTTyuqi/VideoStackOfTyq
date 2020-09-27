@@ -1,9 +1,18 @@
 import axios, { AxiosInstance } from 'axios'
 
+(window as any).axios = axios
 //创建axios实例
 const instance:AxiosInstance= axios.create({
     baseURL:'http://localhost:3000',
     timeout:3000
+})
+//文件上传axios实例
+const instance1:AxiosInstance= axios.create({
+    baseURL:'http://localhost:3000',
+    timeout:3000,
+    headers:{
+        "Content-Type":"multipart/form-data"
+    }
 })
 
 instance.interceptors.request.use((config) => {
@@ -21,4 +30,4 @@ instance.interceptors.response.use((response) => {
     return Promise.reject(error)
 })
 
-export default instance
+export {instance,instance1} 

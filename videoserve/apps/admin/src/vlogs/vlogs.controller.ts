@@ -53,14 +53,21 @@ export class VlogsController {
                     sortable:true,
                     search:true,
                     regex:true,
+                    row:true
                 },
                 {
                     label:'用户🆔',
-                    prop:'vUserId'
+                    prop:'vUserId',
+                    row:true
                 },
                 {
-                    label:'背景图路径',
-                    prop:'vBgimg'
+                    label:'视频封面图',
+                    prop:'vBgimg',
+                    type: 'upload',
+                    listType: 'picture-img',
+                    action: '/upload',
+                    width:120,
+                    row:true
                 }
             ]
         }

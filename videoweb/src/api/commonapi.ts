@@ -1,5 +1,5 @@
 import { AxiosPromise } from 'axios';
-import { deleteAction, getAction, postAction, putAction } from './manageapi';
+import { deleteAction, getAction, postAction, postFileAction, putAction } from './manageapi';
 
 //获取datalist
 export function getDataList(url:string,params:{}):AxiosPromise<any>{
@@ -24,4 +24,9 @@ export function deleDataObj(url:string,params?:{}):AxiosPromise<any>{
 //获取tabledataCloms
 export function getOption(url:string,param?:{}):AxiosPromise<any>{
     return getAction(url,param)
+}
+
+//图片上传
+export function upload(url:string,param:{}):AxiosPromise<any>{
+    return postFileAction(url,param)
 }

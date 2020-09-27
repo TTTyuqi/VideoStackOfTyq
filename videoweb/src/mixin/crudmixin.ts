@@ -1,5 +1,5 @@
 import { Component,Prop,Vue } from 'vue-property-decorator';
-import {createDataObj, deleDataObj, getDataList, getOption, modifyDataObj} from '../api/commonapi'
+import {createDataObj, deleDataObj, getDataList, getOption, modifyDataObj,upload} from '../api/commonapi'
 @Component({})
 export default class crudmixin extends Vue{
     @Prop() urlpath!:string
@@ -98,6 +98,19 @@ export default class crudmixin extends Vue{
         this.feachData()
         this.$message.success("删除成功")
     }
+    //图片上传
+    // async uploadbefore(file,done,loading,column){
+        // let form = new FormData();
+        // // 文件对象
+        // form.append("file", file);
+        // let imgurl = await upload('/upload',form)
+        // loading()
+        // done(file)
+        // console.log("done",column)
+        // column.prop = 
+        // console.log("file",imgurl.data.url)
+    // }
+
     created ():void {
         this.loadOption()
     }
