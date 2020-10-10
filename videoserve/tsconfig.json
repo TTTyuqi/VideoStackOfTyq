@@ -17,6 +17,12 @@
       ],
       "@libs/db/*": [
         "libs/db/src/*"
+      ],
+      "@libs/envconfig": [
+        "libs/envconfig/src"
+      ],
+      "@libs/envconfig/*": [
+        "libs/envconfig/src/*"
       ]
     }
   }

@@ -46,8 +46,12 @@ export default class MainMenu extends Vue {
                         path:'/home'
                     },
                     {
-                        title:'Video管理',
+                        title:'视频管理',
                         path:'/vlogscrud/vlog'
+                    },
+                     {
+                        title:'文件管理',
+                        path:'/vfilescrud/video'
                     }
                 ]
             },

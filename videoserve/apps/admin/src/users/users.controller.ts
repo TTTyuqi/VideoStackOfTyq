@@ -40,6 +40,7 @@ export class UsersController {
         return await this.usersService.createUser(user)
     }
 
+    @ApiOperation({summary:'获取表头'})
     @Get('/option')
     getOption():{}{
         return{

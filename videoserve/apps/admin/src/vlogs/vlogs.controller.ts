@@ -39,6 +39,7 @@ export class VlogsController {
         return await this.vlogServices.delVlogById(id)
     }
 
+    @ApiOperation({summary:'获取表头'})
     @Get('/option')
     getOption():{}{
         return {

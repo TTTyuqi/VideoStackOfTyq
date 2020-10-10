@@ -25,6 +25,12 @@ const routes:RouteConfig[] = [
         name:'user',
         component:() => import(/* webpackChunkName: "User" */'../views/page/user/UserPage.vue'),
         props:true
+      },
+      {
+        path:'/vfilescrud/:urlpath',
+        name:'vfile',
+        component:() => import(/* webpackChunkName: "Vfiles" */'../views/page/video/VideoFile.vue'),
+        props:true
       }
     ]
     

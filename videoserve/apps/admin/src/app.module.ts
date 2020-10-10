@@ -1,28 +1,34 @@
-import { DbModule } from '@libs/db';
 import { Module } from '@nestjs/common';
 import { MulterModule } from '@nestjs/platform-express';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { VlogsModule } from './vlogs/vlogs.module';
+import { VideosModule } from './videos/videos.module';
+import { EnvconfigModule } from '@libs/envconfig';
 
 const MAO = require('multer-aliyun-oss');
 @Module({
   imports: [
-    MulterModule.register({
-      storage: MAO({
-        config: {
-            region: 'oss-cn-hangzhou',
-            accessKeyId: 'LTAI4G3uzQd9UcoLV9jWYNPj',
-            accessKeySecret: 'owTKO7qwKUkzHAlFfH9eK2w0oLakGU',
-            bucket: 'videotyuqi'
-        }
+    EnvconfigModule,
+    MulterModule.registerAsync({
+      useFactory(){
+        return {
+          storage: MAO({
+          config: {
+              region: process.env.OSS_ALI_REGION,
+              accessKeyId: process.env.OSS_ALI_ACCESS_KEY_ID,
+              accessKeySecret: process.env.OSS_ALIACCESS_KEY_SECRET,
+              bucket: process.env.OSS_ALI_BUCKET,
+          }
       })
-      // dest: 'upload',
+        }
+      }
     }),
-    DbModule,
     UsersModule, 
-    VlogsModule],
+    VlogsModule, 
+    VideosModule
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
